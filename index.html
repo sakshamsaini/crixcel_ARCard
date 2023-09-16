@@ -1,0 +1,327 @@
+<html>
+	  <head>
+	    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@0.4.2/dist/mindar.prod.js"></script>
+	    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		 <script type="text/javascript">
+			    $(window).load(function(){
+			        $('#onload').modal('show');
+			    });
+	     </script>	
+	    <script>
+	    	let x =0;
+	    	let y=0;
+	     
+	         const showIntro = () => {
+	         	
+	      	  const introId = document.querySelector("#intro_card");
+	      	   introId.setAttribute("visible", true);
+	      	   //video frame animation
+	      	   const videoIntro = document.querySelector("#video-mp4"); //setvideo
+	      	   const videoframe = document.querySelector("#introvideo");//set video entity
+	      	   const vid = setInterval(() => {
+	           if(x<0.8){
+	           	 x += 0.2;
+	           }
+	           
+	            if (x >=0.8) 
+	            {
+	            clearInterval(vid);
+	            
+	            }
+	           
+	           videoframe.setAttribute("position", x + " 0 0");  //set position of video entity
+	        },200);
+	      	   setTimeout(()=>{
+	      	   	videoIntro.play(); //play video after animation 
+	      	   },1000);
+	         // idcard event
+	         
+	         const idCard = document.querySelector("#intro_card_ent");
+	         
+	          const id = setInterval(() => {
+	           if(y<0.5){
+	           	y+=0.1;
+	           }
+	           if (y >=0.5) 
+	           {
+	            clearInterval(id);
+	           }
+	           
+	           idCard.setAttribute("position","0 " + y +" 0");  //set position of idcard entity
+	        },200);
+
+
+	        
+	      	   //Buttons Events
+	      	const instaButton = document.querySelector("#insta-button");
+	        const fbButton = document.querySelector("#fb-button");
+	        const emailButton = document.querySelector("#email-button");
+	        const phoneButton = document.querySelector("#phone-button");
+	        const webButton = document.querySelector("#web-button");
+	        
+	        const idbutton = setInterval(()=>{
+
+	        fbButton.setAttribute("visible", true);
+	        setTimeout(() => {
+	          instaButton.setAttribute("visible", true);
+	        },250);
+	        setTimeout(() => {
+	          phoneButton.setAttribute("visible", true);
+	        }, 500);
+	        setTimeout(() => {
+	          webButton.setAttribute("visible", true);
+	        }, 750);
+	        setTimeout(() => {
+	         emailButton.setAttribute("visible", true);
+	        }, 1000);
+	        },500);
+	        let currentTab = '';
+	        webButton.addEventListener('click', function (evt) {
+	         window.open('https://www.chockytales.com','_blank');
+	         
+	        });
+	        emailButton.addEventListener('click', function (evt) {
+	           window.location.href="mailto:info@chockytales.com";
+	        });
+	        instaButton.addEventListener('click', function (evt) {
+	           window.open('https://instagram.com/chockytales?igshid=10si6cktw7obb','_blank');
+	        });
+	        fbButton.addEventListener('click', function (evt) {
+	         window.open('"https://www.facebook.com/chockytales/','_blank');
+	        }); 
+	        phoneButton.addEventListener('click', function (evt) {
+	         window.location.href="tel:7337412111";
+	        });
+	         
+
+	    }
+
+	     
+	      AFRAME.registerComponent('mytarget',{
+	        init: function () {
+	          this.el.addEventListener('targetFound', event => {
+	            console.log("target found");
+	                showIntro(() => {
+	                            
+	              }, 300);
+	            
+	          
+	          this.el.addEventListener('targetLost', event => {
+	            console.log("target lost");
+	             document.querySelector("#video-mp4").pause();
+	          });
+	          //this.el.emit('targetFound');
+	        })
+	      }
+	  });
+	    </script>
+
+	    <style>
+	      body {
+	        margin: 0;
+	      }
+	      .example-container {
+	        overflow: hidden;
+	        position: absolute;
+	        width: 100%;
+	        height: 100%;
+	      }
+	     
+	      #example-scanning-overlay {
+		   display: flex;
+		   align-items: center;
+		   justify-content: center;
+		   position: absolute;
+		   left: 0;
+		   right: 0;
+		   top: 0;
+		   bottom: 0;
+		   background: transparent;
+		   z-index: 2;
+	      }
+	      @media (min-aspect-ratio: 1/1) {
+		   #example-scanning-overlay .inner {
+		    width: 50vh;
+		    height: 50vh;
+		  }
+	      }
+	      @media (max-aspect-ratio: 1/1) {
+		   #example-scanning-overlay .inner {
+		  width: 80vw;
+		  height: 80vw;
+		}
+	      }
+
+	      #example-scanning-overlay .inner {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+
+		background:
+		  linear-gradient(to right, white 10px, transparent 10px) 0 0,
+		  linear-gradient(to right, white 10px, transparent 10px) 0 100%,
+		  linear-gradient(to left, white 10px, transparent 10px) 100% 0,
+		  linear-gradient(to left, white 10px, transparent 10px) 100% 100%,
+		  linear-gradient(to bottom, white 10px, transparent 10px) 0 0,
+		  linear-gradient(to bottom, white 10px, transparent 10px) 100% 0,
+		  linear-gradient(to top, white 10px, transparent 10px) 0 100%,
+		  linear-gradient(to top, white 10px, transparent 10px) 100% 100%;
+		background-repeat: no-repeat;
+		background-size: 40px 40px;
+	      }
+
+	      #example-scanning-overlay.hidden {
+		display: none;
+	      }
+
+	      #example-scanning-overlay img {
+		opacity: 0.6;
+		width: 90%;
+		align-self: center;
+	      }
+
+	      #example-scanning-overlay .inner .scanline {
+		position: absolute;
+		width: 100%;
+		height: 10px;
+		background: white;
+		animation: move 2s linear infinite;
+	      }
+	      @keyframes move {
+		0%, 100% { top: 0% }
+		50% { top: calc(100% - 10px) }
+	      }
+
+		.head{
+			color:black;
+			text-align: center;
+		}
+		
+		 h2 {
+		 	position: absolute;
+            font-size: 3em;
+            font-weight: bolder;
+            font-family: serif;
+            color: #ffffff;
+            text-align: center;
+            animation: animate 
+                1.0s linear infinite;
+        }
+  
+        @keyframes animate {
+            0% {
+                opacity: 0.2;
+            }
+  
+            50% {
+                opacity: 1;
+            }
+  
+            100% {
+                opacity: 0.2;
+            }
+        }
+
+        .modal{
+        	padding-top: 15%;
+        }
+		
+		
+	    </style>
+	  
+	  </head>
+      <body>
+	    <div class="container">
+	
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  id="onload">
+        
+        <div class="modal-dialog">
+      <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">X</button>
+          <h3 class="modal-title"><i class="fa fa-exclamation-circle"></i>Welcome to AR Visiting Cards </h3>
+          <hr>
+          <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i>Instructions:</h4>
+        </div>
+        <div class="modal-body"><ol>
+			  <li>Place the visiting card on a plain background.</li>
+			  <li>Scan the card.</li>
+			  
+		  </ol></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Start</button>
+        </div>
+         </div>
+        </div>
+      </div>
+     </div>
+
+	    <div class="example-container">
+	        <div id="example-scanning-overlay" class="hidden">
+		        <div class="inner">
+		            <img src="./assets/targets.jpg"/>
+		            <h2 class = "scantext"> Scan Me!</h2>
+		        </div>
+	        </div>
+
+	      <a-scene mindar="imageTargetSrc: assets/targets.mind; showStats: false; uiScanning: #example-scanning-overlay;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+	        <a-assets>
+	          <img id="card" src="./assets/targets.jpg"/>
+	          <img id="icon-web" src="./assets/icon/website.png"/>
+	          <img id="icon-phone" src="./assets/icon/call.png"/>
+	          <img id="icon-email" src="./assets/icon/mail.png"/>
+	          <img id="icon-fb" src="./assets/icon/facebook.png"/>
+	          <img id="icon-insta" src="./assets/icon/instagram.png"/>
+	          <img id="intro" src="./assets/Geetanjali.png"/>
+	          <video id="video-mp4" autoplay="false" loop="false" src="./assets/video.mp4"></video>
+	        </a-assets>
+	         
+	        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
+	        </a-camera>
+
+	        <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
+
+	           <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+	           <a-entity id ="intro_card_ent" >
+	            <a-image visible= true id="intro_card" src="#intro" alpha-test="0.5" position="0 0 -0.1" height="0.552" width="1"
+	            ></a-image>
+	         </a-entity>
+
+	           <a-image visible=false id="fb-button" class="clickable" src="#icon-fb" alpha-test="0.4" position="-0.4 -0.4 0" height="0.11" width="0.11"
+	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+	          ></a-image>
+
+	          <a-image visible= false id="insta-button" class="clickable" src="#icon-insta"  position="-0.2 -0.4 0" height="0.11" width="0.11"
+	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+	          ></a-image>
+
+	         <a-image visible= false id="phone-button" class="clickable" src="#icon-phone" position="0 -0.4 0" height="0.11" width="0.11"
+	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+	          ></a-image> 
+
+	          <a-image visible= false id="web-button" class="clickable" src="#icon-web" alpha-test="0.5" position="0.2 -0.4 0" height="0.11" width="0.11"
+	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+	          ></a-image>
+
+	          <a-image visible= false id="email-button" class="clickable" src="#icon-email"  position="0.4 -0.4 0" height="0.11" width="0.11"
+	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+	          ></a-image>
+
+	    
+	           <a-entity id ="introvideo">
+	            <a-video src="#video-mp4" width="0.3" height="0.552" position="0 0 -0.1"  webkit-playsinline playsinline></a-video>
+	           </a-entity>
+	        </a-entity>
+	      </a-scene>
+	    </div>
+	  </body>
+	</html>
