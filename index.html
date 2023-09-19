@@ -239,44 +239,20 @@
 	  
 	  </head>
       <body>
-	    <div class="container">
-	
-        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  id="onload">
-        
-        <div class="modal-dialog">
-      <!-- Modal content-->
-        <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">X</button>
-          <h3 class="modal-title"><i class="fa fa-exclamation-circle"></i>Welcome to AR Visiting Cards </h3>
-          <hr>
-          <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i>Instructions:</h4>
-        </div>
-        <div class="modal-body"><ol>
-			  <li>Place the visiting card on a plain background.</li>
-			  <li>Scan the card.</li>
-			  
-		  </ol></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Start</button>
-        </div>
-         </div>
-        </div>
-      </div>
-     </div>
+	   
 
 	    <div class="example-container">
 	        <div id="example-scanning-overlay" class="hidden">
 		        <div class="inner">
-		            <img src="./assets/targets.jpg"/>
+		            <img src="./assets/targets.png"/>
 		            <h2 class = "scantext"> Scan Me!</h2>
 		        </div>
 	        </div>
 
 	      <a-scene mindar="imageTargetSrc: assets/targets.mind; showStats: false; uiScanning: #example-scanning-overlay;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
 	        <a-assets>
-	          <img id="card" src="./assets/targets.jpg"/>
-	          <img id="icon-web" src="./assets/icon/website.png"/>
+	          <img id="card" src="./assets/targets.png"/>
+	          <img id="icon-web" src="./assets/icon/web.png"/>
 	          <img id="icon-phone" src="./assets/icon/call.png"/>
 	          <img id="icon-email" src="./assets/icon/mail.png"/>
 	          <img id="icon-fb" src="./assets/icon/facebook.png"/>
