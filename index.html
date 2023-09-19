@@ -5,280 +5,294 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">	
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
     <script>
-	    	let x =0;
-	    	let y=0;
-	     
-	         const showIntro = () => {
-	         	
-	      	  const introId = document.querySelector("#intro_card");
-	      	   introId.setAttribute("visible", true);
-	      	   //video frame animation
-	      	   const videoIntro = document.querySelector("#video-mp4"); //setvideo
-	      	   const videoframe = document.querySelector("#introvideo");//set video entity
-	      	   const vid = setInterval(() => {
-	           if(x<0.8){
-	           	 x += 0.2;
-	           }
-	           
-	            if (x >=0.8) 
-	            {
-	            clearInterval(vid);
-	            
-	            }
-	           
-	           videoframe.setAttribute("position", x + " 0 0");  //set position of video entity
-	        },200);
-	      	   setTimeout(()=>{
-	      	   	videoIntro.play(); //play video after animation 
-	      	   },1000);
-	         // idcard event
-	         
-	         const idCard = document.querySelector("#intro_card_ent");
-	         
-	          const id = setInterval(() => {
-	           if(y<0.5){
-	           	y+=0.1;
-	           }
-	           if (y >=0.5) 
-	           {
-	            clearInterval(id);
-	           }
-	           
-	           idCard.setAttribute("position","0 " + y +" 0");  //set position of idcard entity
-	        },200);
+      const showInfo = () => {
+        let y = 0;
+        const profileButton = document.querySelector("#profile-button");
+        const webButton = document.querySelector("#web-button");
+        const emailButton = document.querySelector("#email-button");
+        const locationButton = document.querySelector("#location-button");
+        const text = document.querySelector("#text");
 
+        profileButton.setAttribute("visible", true);
+        setTimeout(() => {
+          webButton.setAttribute("visible", true);
+        }, 300);
+        setTimeout(() => {
+          emailButton.setAttribute("visible", true);
+        }, 600);
+        setTimeout(() => {
+          locationButton.setAttribute("visible", true);
+        }, 900);
 
-	        
-	      	   //Buttons Events
-	      	const instaButton = document.querySelector("#insta-button");
-	        const fbButton = document.querySelector("#fb-button");
-	        const emailButton = document.querySelector("#email-button");
-	        const phoneButton = document.querySelector("#phone-button");
-	        const webButton = document.querySelector("#web-button");
-	        
-	        const idbutton = setInterval(()=>{
+        let currentTab = '';
+        webButton.addEventListener('click', function (evt) {
+          text.setAttribute("value", "https://softmind.tech");
+          currentTab = 'web';
+        });
+        emailButton.addEventListener('click', function (evt) {
+          text.setAttribute("value", "hello@softmind.tech");
+          currentTab = 'email';
+        });
+        profileButton.addEventListener('click', function (evt) {
+          text.setAttribute("value", "AR, VR solutions and consultation");
+          currentTab = 'profile';
+        });
+        locationButton.addEventListener('click', function (evt) {
+          console.log("loc");
+          text.setAttribute("value", "Vancouver, Canada | Hong Kong");
+          currentTab = 'location';
+        });
 
-	        fbButton.setAttribute("visible", true);
-	        setTimeout(() => {
-	          instaButton.setAttribute("visible", true);
-	        },250);
-	        setTimeout(() => {
-	          phoneButton.setAttribute("visible", true);
-	        }, 500);
-	        setTimeout(() => {
-	          webButton.setAttribute("visible", true);
-	        }, 750);
-	        setTimeout(() => {
-	         emailButton.setAttribute("visible", true);
-	        }, 1000);
-	        },500);
-	        let currentTab = '';
-	        webButton.addEventListener('click', function (evt) {
-	         window.open('https://www.chockytales.com','_blank');
-	         
-	        });
-	        emailButton.addEventListener('click', function (evt) {
-	           window.location.href="mailto:info@chockytales.com";
-	        });
-	        instaButton.addEventListener('click', function (evt) {
-	           window.open('https://instagram.com/chockytales?igshid=10si6cktw7obb','_blank');
-	        });
-	        fbButton.addEventListener('click', function (evt) {
-	         window.open('"https://www.facebook.com/chockytales/','_blank');
-	        }); 
-	        phoneButton.addEventListener('click', function (evt) {
-	         window.location.href="tel:7337412111";
-	        });
-	         
+        text.addEventListener('click', function (evt) {
+          if (currentTab === 'web') {
+            window.location.href="https://softmind.tech";
+          }
+        });
+      }
 
-	    }
+      const showPortfolio = (done) => {
+        const portfolio = document.querySelector("#portfolio-panel");
+        const portfolioLeftButton = document.querySelector("#portfolio-left-button");
+        const portfolioRightButton = document.querySelector("#portfolio-right-button");
+        const paintandquestPreviewButton = document.querySelector("#paintandquest-preview-button");
 
-	     
-	      AFRAME.registerComponent('mytarget',{
-	        init: function () {
-	          this.el.addEventListener('targetFound', event => {
-	            console.log("target found");
-	                showIntro(() => {
-	                            
-	              }, 300);
-	            
-	          
-	          this.el.addEventListener('targetLost', event => {
-	            console.log("target lost");
-	             document.querySelector("#video-mp4").pause();
-	          });
-	          //this.el.emit('targetFound');
-	        })
-	      }
-	  });
-	    </script>
+        let y = 0;
+        let currentItem = 0;
 
-	    <style>
-	      body {
-	        margin: 0;
-	      }
-	      .example-container {
-	        overflow: hidden;
-	        position: absolute;
-	        width: 100%;
-	        height: 100%;
-	      }
-	     
-	      #example-scanning-overlay {
-		   display: flex;
-		   align-items: center;
-		   justify-content: center;
-		   position: absolute;
-		   left: 0;
-		   right: 0;
-		   top: 0;
-		   bottom: 0;
-		   background: transparent;
-		   z-index: 2;
-	      }
-	      @media (min-aspect-ratio: 1/1) {
-		   #example-scanning-overlay .inner {
-		    width: 50vh;
-		    height: 50vh;
-		  }
-	      }
-	      @media (max-aspect-ratio: 1/1) {
-		   #example-scanning-overlay .inner {
-		  width: 80vw;
-		  height: 80vw;
-		}
-	      }
+        portfolio.setAttribute("visible", true);
 
-	      #example-scanning-overlay .inner {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		position: relative;
-
-		background:
-		  linear-gradient(to right, white 10px, transparent 10px) 0 0,
-		  linear-gradient(to right, white 10px, transparent 10px) 0 100%,
-		  linear-gradient(to left, white 10px, transparent 10px) 100% 0,
-		  linear-gradient(to left, white 10px, transparent 10px) 100% 100%,
-		  linear-gradient(to bottom, white 10px, transparent 10px) 0 0,
-		  linear-gradient(to bottom, white 10px, transparent 10px) 100% 0,
-		  linear-gradient(to top, white 10px, transparent 10px) 0 100%,
-		  linear-gradient(to top, white 10px, transparent 10px) 100% 100%;
-		background-repeat: no-repeat;
-		background-size: 40px 40px;
-	      }
-
-	      #example-scanning-overlay.hidden {
-		display: none;
-	      }
-
-	      #example-scanning-overlay img {
-		opacity: 0.6;
-		width: 90%;
-		align-self: center;
-	      }
-
-	      #example-scanning-overlay .inner .scanline {
-		position: absolute;
-		width: 100%;
-		height: 10px;
-		background: white;
-		animation: move 2s linear infinite;
-	      }
-	      @keyframes move {
-		0%, 100% { top: 0% }
-		50% { top: calc(100% - 10px) }
-	      }
-
-		.head{
-			color:black;
-			text-align: center;
-		}
-		
-		 h2 {
-		 	position: absolute;
-            font-size: 3em;
-            font-weight: bolder;
-            font-family: serif;
-            color: #ffffff;
-            text-align: center;
-            animation: animate 
-                1.0s linear infinite;
+        const showPortfolioItem = (item) => {
+          for (let i = 0; i <= 2; i++) {
+            document.querySelector("#portfolio-item" + i).setAttribute("visible", i === item);
+          }
         }
-  
-        @keyframes animate {
-            0% {
-                opacity: 0.2;
-            }
-  
-            50% {
-                opacity: 1;
-            }
-  
-            100% {
-                opacity: 0.2;
-            }
+        const id = setInterval(() => {
+          y += 0.008;
+          if (y >= 0.6) {
+            clearInterval(id);
+            portfolioLeftButton.setAttribute("visible", true);
+            portfolioRightButton.setAttribute("visible", true);
+            portfolioLeftButton.addEventListener('click', () => {
+              currentItem = (currentItem + 1) % 3;
+              showPortfolioItem(currentItem);
+            });
+            portfolioRightButton.addEventListener('click', () => {
+              currentItem = (currentItem - 1 + 3) % 3;
+              showPortfolioItem(currentItem);
+            });
+
+            paintandquestPreviewButton.addEventListener('click', () => {
+              paintandquestPreviewButton.setAttribute("visible", false);
+              const testVideo = document.createElement( "video" );
+              const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
+              if (canplayWebm == "") {
+                document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
+                document.querySelector("#paintandquest-video-mp4").play();
+              } else {
+                document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-webm");
+                document.querySelector("#paintandquest-video-webm").play();
+              }
+            });
+
+            setTimeout(() => {
+              done();
+            }, 500);
+          }
+          portfolio.setAttribute("position", "0 " + y + " -0.01");
+        }, 10);
+      }
+
+      const showAvatar = (onDone) => {
+        const avatar = document.querySelector("#avatar");
+        let z = -0.3;
+        const id = setInterval(() => {
+          z += 0.008;
+          if (z >= 0.3) {
+            clearInterval(id);
+            onDone();
+          }
+          avatar.setAttribute("position", "0 -0.25 " + z);
+        }, 10);
+      }
+
+      AFRAME.registerComponent('mytarget', {
+        init: function () {
+          this.el.addEventListener('targetFound', event => {
+            console.log("target found");
+            showAvatar(() => {
+              setTimeout(() => {
+                showPortfolio(() => {
+                  setTimeout(() => {
+                    showInfo();
+                  }, 300);
+                });
+              }, 300);
+            });
+          });
+          this.el.addEventListener('targetLost', event => {
+            console.log("target found");
+          });
+          //this.el.emit('targetFound');
         }
+      });
+    </script>
 
-        .modal{
-        	padding-top: 15%;
-        }
-		
-		
-	    </style>
-	  
-	  </head>
-      <body>
+    <style>
+      body {
+        margin: 0;
+      }
+      .example-container {
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+     
+      #example-scanning-overlay {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: transparent;
+	z-index: 2;
+      }
+      @media (min-aspect-ratio: 1/1) {
+	#example-scanning-overlay .inner {
+	  width: 50vh;
+	  height: 50vh;
+	}
+      }
+      @media (max-aspect-ratio: 1/1) {
+	#example-scanning-overlay .inner {
+	  width: 80vw;
+	  height: 80vw;
+	}
+      }
 
-	    <div class="example-container">
-	        <div id="example-scanning-overlay" class="hidden">
-		        <div class="inner">
-		            <img src="./assets/targets.png"/>
-		            <h2 class = "scantext"> Scan Me!</h2>
-		        </div>
-	        </div>
+      #example-scanning-overlay .inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
 
-	      <a-scene mindar="imageTargetSrc: assets/targets.mind; showStats: false; uiScanning: #example-scanning-overlay;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-	        <a-assets>
-	          <img id="card" src="./assets/targets.png"/>
-	          <img id="icon-web" src="./assets/icon/website.png"/>
-	          <img id="icon-phone" src="./assets/icon/call.png"/>
-	          <img id="icon-email" src="./assets/icon/mail.png"/>
-	          <video id="video-mp4" autoplay="false" loop="false" src="./assets/sambhav.mp4"></video>
-		  <video id="video-card" autoplay="false" loop="false" src="./assets/cardvideo.mp4"></video>
-	        </a-assets>
-	         
-	        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
-	        </a-camera>
+	background:
+	  linear-gradient(to right, white 10px, transparent 10px) 0 0,
+	  linear-gradient(to right, white 10px, transparent 10px) 0 100%,
+	  linear-gradient(to left, white 10px, transparent 10px) 100% 0,
+	  linear-gradient(to left, white 10px, transparent 10px) 100% 100%,
+	  linear-gradient(to bottom, white 10px, transparent 10px) 0 0,
+	  linear-gradient(to bottom, white 10px, transparent 10px) 100% 0,
+	  linear-gradient(to top, white 10px, transparent 10px) 0 100%,
+	  linear-gradient(to top, white 10px, transparent 10px) 100% 100%;
+	background-repeat: no-repeat;
+	background-size: 40px 40px;
+      }
 
-	        <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
+      #example-scanning-overlay.hidden {
+	display: none;
+      }
 
-	           <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-	
-	         <a-image visible= false id="phone-button" class="clickable" src="#icon-phone" position="0 -0.4 0" height="0.11" width="0.11"
-	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-	          ></a-image> 
+      #example-scanning-overlay img {
+	opacity: 0.6;
+	width: 90%;
+	align-self: center;
+      }
 
-	          <a-image visible= false id="web-button" class="clickable" src="#icon-web" alpha-test="0.5" position="0.2 -0.4 0" height="0.11" width="0.11"
-	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-	          ></a-image>
+      #example-scanning-overlay .inner .scanline {
+	position: absolute;
+	width: 100%;
+	height: 10px;
+	background: white;
+	animation: move 2s linear infinite;
+      }
+      @keyframes move {
+	0%, 100% { top: 0% }
+	50% { top: calc(100% - 10px) }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="example-container">
+      <div id="example-scanning-overlay" class="hidden">
+	<div class="inner">
+	  <img src="./assets/card-example/card.png"/>
+	  <div class="scanline"></div>
+	</div>
+      </div>
 
-	          <a-image visible= false id="email-button" class="clickable" src="#icon-email"  position="0.4 -0.4 0" height="0.11" width="0.11"
-	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-	          ></a-image>
+      <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/image-tracking/assets/card-example/card.mind; showStats: false; uiScanning: #example-scanning-overlay;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        <a-assets>
+          <img id="card" src="./assets/card-example/card.png" />
+          <img id="icon-web" src="./assets/card-example/icons/web.png" />
+          <img id="icon-location" src="./assets/card-example/icons/location.png" />
+          <img id="icon-profile" src="./assets/card-example/icons/profile.png" />
+          <img id="icon-phone" src="./assets/card-example/icons/phone.png" />
+          <img id="icon-email" src="./assets/card-example/icons/email.png" />
+          <img id="icon-play" src="./assets/card-example/icons/play.png" />
+          <img id="icon-left" src="./assets/card-example/icons/left.png" />
+          <img id="icon-right" src="./assets/card-example/icons/right.png" />
+          <img id="paintandquest-preview" src="./assets/card-example/portfolio/paintandquest-preview.png" />
+          <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./assets/card-example/portfolio/paintandquest.mp4"></video>
+          <video id="paintandquest-video-webm" autoplay="false" loop="true" src="./assets/card-example/portfolio/paintandquest.webm"></video>
+          <img id="coffeemachine-preview" src="./assets/card-example/portfolio/coffeemachine-preview.png" />
+          <img id="peak-preview" src="./assets/card-example/portfolio/peak-preview.png" />
+          
+          <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
+        </a-assets>
 
-	           <a-entity id ="introvideo">
-	            <a-video src="#video-mp4" width="0.3" height="0.552" position="0 0 -0.1"  webkit-playsinline playsinline></a-video>
-	           </a-entity>
-		  <a-entity id ="mainvideo">
-	            <a-video src="#video-card" width="0.3" height="0.552" position="0 1 -0.1"  webkit-playsinline playsinline></a-video>
-	           </a-entity>
-	        </a-entity>
-	      </a-scene>
-	    </div>
-	  </body>
-	</html>
+        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
+        </a-camera>
+
+        <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
+          <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+
+          <a-entity visible=false id="portfolio-panel" position="0 0 -0.01">
+            <a-text value="Portfolio" color="black" align="center" width="2" position="0 0.4 0"></a-text>
+            <a-entity id="portfolio-item0">
+              <a-video id="paintandquest-video-link" webkit-playsinline playsinline width="1" height="0.552" position="0 0 0"></a-video>
+              <a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 0 0" height="0.552" width="1">
+              </a-image>
+            </a-entity>
+            <a-entity id="portfolio-item1" visible=false>
+              <a-image class="clickable" src="#coffeemachine-preview" alpha-test="0.5" position="0 0 0" height="0.552" width="1">
+              </a-image>
+            </a-entity>
+            <a-entity id="portfolio-item2" visible=false>
+              <a-image class="clickable" src="#peak-preview" alpha-test="0.5" position="0 0 0" height="0.552" width="1">
+              </a-image>
+            </a-entity>
+
+            <a-image visible=false id="portfolio-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
+            <a-image visible=false id="portfolio-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
+          </a-entity>
+
+          <a-image visible=false id="profile-button" class="clickable" src="#icon-profile" position="-0.42 -0.5 0" height="0.15" width="0.15"
+            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+          ></a-image>
+
+          <a-image visible=false id="web-button" class="clickable" src="#icon-web" alpha-test="0.5" position="-0.14 -0.5 0" height="0.15" width="0.15"
+            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+          ></a-image>
+
+          <a-image visible=false id="email-button" class="clickable" src="#icon-email"  position="0.14 -0.5 0" height="0.15" width="0.15"
+            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+          ></a-image>
+
+          <a-image visible=false id="location-button" class="clickable" src="#icon-location" position="0.42 -0.5 0" height="0.15" width="0.15"
+            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+          ></a-image>
+
+          <a-gltf-model id="avatar" rotation="0 0 0" position="0 -0.25 0" scale="0.004 0.004 0.004" src="#avatarModel"></a-gltf-model>
+
+          <a-text id="text" class="clickable" value="" color="black" align="center" width="2" position="0 -1 0" geometry="primitive:plane; height: 0.1; width: 2;" material="opacity: 0.5"></a-text>
+        </a-entity>
+      </a-scene>
+    </div>
+  </body>
+</html>
