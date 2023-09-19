@@ -52,7 +52,7 @@
         });
       }
 
-      const showPortfolio = (done) => {
+     <!-- const showPortfolio = (done) => {
         const portfolio = document.querySelector("#portfolio-panel");
         const portfolioLeftButton = document.querySelector("#portfolio-left-button");
         const portfolioRightButton = document.querySelector("#portfolio-right-button");
@@ -102,7 +102,7 @@
           }
           portfolio.setAttribute("position", "0 " + y + " -0.01");
         }, 10);
-      }
+      }-->
 
       const showVideo = (onDone) => {
         const mainVideo = document.querySelector("#main-video");
@@ -254,7 +254,7 @@
           ></a-image>
 
           <a-entity id ="introvideo">
-              <a-video src="#video-mp4" width="0.3" height="0.552" position="0 0 -0.1"  webkit-playsinline playsinline></a-video>
+              <a-video src="#video-mp4" width="0.3" height="0.552" position="0 0 0.1"  webkit-playsinline playsinline></a-video>
              </a-entity>
 
           <a-text id="text" class="clickable" value="" color="black" align="center" width="2" position="0 -1 0" geometry="primitive:plane; height: 0.1; width: 2;" material="opacity: 0.5"></a-text>
