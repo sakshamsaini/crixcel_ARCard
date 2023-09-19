@@ -254,10 +254,8 @@
 	          <img id="icon-web" src="./assets/icon/website.png"/>
 	          <img id="icon-phone" src="./assets/icon/call.png"/>
 	          <img id="icon-email" src="./assets/icon/mail.png"/>
-	          <img id="icon-fb" src="./assets/icon/facebook.png"/>
-	          <img id="icon-insta" src="./assets/icon/instagram.png"/>
-	          <img id="intro" src="./assets/Geetanjali.png"/>
-	          <video id="video-mp4" autoplay="false" loop="false" src="./assets/video.mp4"></video>
+	          <video id="video-mp4" autoplay="false" loop="false" src="./assets/sambhav.mp4"></video>
+		  <video id="video-card" autoplay="false" loop="false" src="./assets/cardvideo.mp4"></video>
 	        </a-assets>
 	         
 	        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
@@ -266,19 +264,7 @@
 	        <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
 
 	           <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-	           <a-entity id ="intro_card_ent" >
-	            <a-image visible= true id="intro_card" src="#intro" alpha-test="0.5" position="0 0 -0.1" height="0.552" width="1"
-	            ></a-image>
-	         </a-entity>
-
-	           <a-image visible=false id="fb-button" class="clickable" src="#icon-fb" alpha-test="0.4" position="-0.4 -0.4 0" height="0.11" width="0.11"
-	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-	          ></a-image>
-
-	          <a-image visible= false id="insta-button" class="clickable" src="#icon-insta"  position="-0.2 -0.4 0" height="0.11" width="0.11"
-	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-	          ></a-image>
-
+	
 	         <a-image visible= false id="phone-button" class="clickable" src="#icon-phone" position="0 -0.4 0" height="0.11" width="0.11"
 	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
 	          ></a-image> 
@@ -291,9 +277,11 @@
 	            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
 	          ></a-image>
 
-	    
 	           <a-entity id ="introvideo">
 	            <a-video src="#video-mp4" width="0.3" height="0.552" position="0 0 -0.1"  webkit-playsinline playsinline></a-video>
+	           </a-entity>
+		  <a-entity id ="mainvideo">
+	            <a-video src="#video-card" width="0.3" height="0.552" position="0 1 -0.1"  webkit-playsinline playsinline></a-video>
 	           </a-entity>
 	        </a-entity>
 	      </a-scene>
